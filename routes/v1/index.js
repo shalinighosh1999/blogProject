@@ -16,8 +16,7 @@ var usersRouter=require('./user')
 ////////////////////////////////////////////////// ************************  ADMIN AND USER AUTH   ************************  ////////////////////////////////////////////////// 
 const admin=require('../../controllers/auth/admin')
 router.get('/test',admin.test)
-console.log('hellooo')
-
+router.post('/admin/adminreg',admin.adminRegister)
 ////////////////////////////////////////////////// ************************  MIDDLEWARE    ************************  ////////////////////////////////////////////////// 
 
 router.use(middleware); 

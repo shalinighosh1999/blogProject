@@ -16,7 +16,16 @@ var usersRouter=require('./user')
 ////////////////////////////////////////////////// ************************  ADMIN AND USER AUTH   ************************  ////////////////////////////////////////////////// 
 const admin=require('../../controllers/auth/admin')
 router.get('/test',admin.test)
+
 router.post('/admin/adminreg',admin.adminRegister)
+router.post('/admin/login',admin.admin_login)
+
+
+const user=require('../../controllers/auth/user')
+
+router.post('/user/userReg',user.userRegister)
+router.post('/user/login',user.user_login)
+
 ////////////////////////////////////////////////// ************************  MIDDLEWARE    ************************  ////////////////////////////////////////////////// 
 
 router.use(middleware); 

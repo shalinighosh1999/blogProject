@@ -10,9 +10,9 @@ var upload = multer({ storage: storage });
 
 ////////////////////////////////////////////////// ************************  ADMIN AND USER AUTH   ************************  ////////////////////////////////////////////////// 
 
+const userauthcontroller=require('../../controllers/auth/user')
 
-
-
+router.post('/changepw',userauthcontroller.changePassword_user)
 
 
 module.exports = router;

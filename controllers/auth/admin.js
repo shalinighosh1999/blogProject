@@ -105,10 +105,53 @@ const admin_login = async (req, res) => {
 }
 
 
+const changePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+
+        // Find the admin by ID
+        const admin = await Admin.findById(req.user._id);
+        if (!admin) {
+            return res.status(404).json({
+                status: false,
+                message: "Admin not found"
+            });
+        }
+
+        // Check if the current password is correct
+        const isMatch = await bcrypt.compare(currentPassword, admin.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                status: false,
+                message: "Current password is incorrect"
+            });
+        }
+
+        // Hash the new password
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update the admin's password
+        admin.password = hashedNewPassword;
+        const updatedAdmin = await admin.save();
+
+        res.status(200).json({
+            status: true,
+            data: updatedAdmin
+        });
+    } catch (error) {
+        console.error("Error changing password:", error);
+        res.status(500).json({
+            status: false,
+            error: "Internal server error"
+        });
+    }
+}
+
 
 module.exports={
     getTokenData,
     adminRegister,
     test,
-    admin_login
+    admin_login,
+    changePassword
 }

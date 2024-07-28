@@ -11,8 +11,9 @@ var storage = multer.memoryStorage()
 var upload = multer({ storage: storage });
 
 ////////////////////////////////////////////////// ************************  ADMIN AND USER AUTH   ************************  ////////////////////////////////////////////////// 
+const adminauthcontroller=require('../../controllers/auth/admin')
 
-
+router.post('/changepw',adminauthcontroller.changePassword)
 
 module.exports = router;
 

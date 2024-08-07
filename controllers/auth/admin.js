@@ -189,17 +189,17 @@ const deleteUser = async (req, res) => {
 
 
 
-//const S3 = require('../../service/s3');
+const S3 = require('../../service/s3');
  
 
-// const imageUpload = async (req, res) => {
-//     let uploadDAta = await S3.doUpload(req, "admin/profile/" + req.user._id);
-//     if (uploadDAta.status) {
-//         res.send(uploadDAta);
-//     } else {
-//         res.send(uploadDAta);
-//     }
-// }
+const imageUpload = async (req, res) => {
+    let uploadDAta = await S3.doUpload(req, "admin/profile/" + req.user._id);
+    if (uploadDAta.status) {
+        res.send(uploadDAta);
+    } else {
+        res.send(uploadDAta);
+    }
+}
 
 
 module.exports={
@@ -208,6 +208,6 @@ module.exports={
     test,
     admin_login,
     changePassword,
-    deleteUser
-    //imageUpload
+    deleteUser,
+    imageUpload
 }

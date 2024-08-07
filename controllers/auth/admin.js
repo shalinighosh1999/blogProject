@@ -4,6 +4,7 @@ const { Validator } = require('node-input-validator');
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const otpGenerator = require('otp-generator')
+const User=require('../../Models/user')
 
 
 
@@ -147,11 +148,66 @@ const changePassword = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({
+                status: false,
+                message: "User ID is required"
+            });
+        }
+
+       
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                status: false,
+                message: "User not found"
+            });
+        }
+
+        user.isDeleted = true;
+        await user.save();
+
+        res.status(200).json({
+            status: true,
+            message: "User successfully marked as deleted"
+        });
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        res.status(500).json({
+            status: false,
+            error: "Internal server error"
+        });
+    }
+};
+
+
+
+
+//const S3 = require('../../service/s3');
+ 
+
+// const imageUpload = async (req, res) => {
+//     let uploadDAta = await S3.doUpload(req, "admin/profile/" + req.user._id);
+//     if (uploadDAta.status) {
+//         res.send(uploadDAta);
+//     } else {
+//         res.send(uploadDAta);
+//     }
+// }
+
 
 module.exports={
     getTokenData,
     adminRegister,
     test,
     admin_login,
-    changePassword
+    changePassword,
+    deleteUser
+    //imageUpload
 }

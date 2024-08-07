@@ -1,13 +1,14 @@
 const AWS = require('aws-sdk');
 const uuidv1 = require('uuid').v1;
 var path = require('path');
+require('dotenv').config()
 
 
 let awsConfig = {
-	region: "",
-	bucket: "",
-    accessKeyId: '',
-    secretAccessKey: ''
+	region: process.env.AWS_REGION,
+	bucket: process.env.AWS_BUCKET,
+    accessKeyId: process.env.AWS_ACCESSKEYID,
+    secretAccessKey: process.env.AWS_SECRETACCESSKEY
 };
 
 

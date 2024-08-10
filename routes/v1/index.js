@@ -10,7 +10,10 @@ const cron=require('node-cron')
 var adminsRouter=require('./admin')
 var usersRouter=require('./user')
 
+const multer = require('multer');
 
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage });
 
 
 ////////////////////////////////////////////////// ************************  ADMIN AND USER AUTH   ************************  ////////////////////////////////////////////////// 
@@ -25,6 +28,10 @@ const user=require('../../controllers/auth/user')
 
 router.post('/user/userReg',user.userRegister)
 router.post('/user/login',user.user_login)
+
+
+
+//router.post('/admin/upload', upload.single("image"), admin.imageUpload);
 
 ////////////////////////////////////////////////// ************************  MIDDLEWARE    ************************  ////////////////////////////////////////////////// 
 

@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -11,10 +12,10 @@ const blogSchema = new Schema({
         required: true
     },
     singleImage: {
-        type: String, 
+        type: String
     },
     multipleImages: [{
-        type: String 
+        type: String
     }],
     isDeleted: {
         type: Boolean,
@@ -22,22 +23,24 @@ const blogSchema = new Schema({
     },
     categoryId: {
         type: Schema.Types.ObjectId,
-        ref: 'BlogCategory', 
+        ref: 'BlogCategory'
     },
     categoryName: {
-        type: String,
+        type: String
     },
-    userId: {
+    userId: { 
         type: Schema.Types.ObjectId,
-        ref: 'User', 
-        required: true
+       // ref: 'Admin' // Change to 'Admin' if using Admin model
     },
     username: {
-        type: String,
-        required: true
+        type: String
+    },
+    isDeleted :{
+        type:Boolean,
+        default:false
     }
 }, {
-    timestamps: true 
+    timestamps: true
 });
 
 const Blog = mongoose.model('Blog', blogSchema);

@@ -14,6 +14,7 @@ var upload = multer({ storage: storage });
 const adminauthcontroller=require('../../controllers/auth/admin')
 
 router.post('/changepw',adminauthcontroller.changePassword)
+router.post('/upload', upload.single("image"), adminauthcontroller.imageUpload);
 
 module.exports = router;
 
